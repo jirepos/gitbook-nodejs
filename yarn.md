@@ -72,6 +72,33 @@ yarn upgrade
 yarn remove react
 ```
 
+
+| npm | yarn | meanings |
+|----|----|---|
+| npm init | yarn init | 초기화. package.json 만든다. |
+| npm install | yarn 또는 yarn install | package.json의 패키지 설치 |
+| npm install --save [package name] | yarn add [ package name] | 의존성으로 추가 |
+| napm install --save-dev [package name] | yarn add --dev (또는 -D) [package name] | 개발 의존성으로 추가 |
+| npm install --global [package name] | yarn global add [package name] | 전역으로 추가 |
+| npm update --save | yarn upgrade | 패키지 업데이트 |
+| npm run [스크립트명] | yarn [스크립트명] | package.json의 스크립트 명령 실행 |
+| npm uninstall --save [package name] | yarn remove [package name] | 패키지 삭제 |
+| npm uninstall -g [pacakge name] | | 전역 패키지 삭제 |
+| npm clean cache | yarn cache clean | 캐시 삭제 |
+| npm list | yarn list | 지역적으로 설치된 패키지 목록 출력 |
+| npm -g list | yarn global list | 전역으로 설치된 패키지 목록 출력 |
+
+* --save 또는 -S를 하면 dependencies에(npm5부터는 -save옵션이 기본적으로 설정되어 있기 때문에 안 붙여도  된다.
+* --save-dev 또는 -D하면 devDependencies에 추가된다. 
+* -g를 하면 글로벌 패키지에 추가된다. 
+
+
+
+
+
+
+
+
 ## Trouble Shooting
 
 ### yarn.ps1 파일을 로드할 수 없다
