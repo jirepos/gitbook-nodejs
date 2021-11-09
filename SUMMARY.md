@@ -1,8 +1,8 @@
 # Table of contents
 
 * [Initial page](README.md)
-* [NPM](npm.md)
-* [Yarn](yarn.md)
+* [NPM](01-npm.md)
+* [Yarn](02-yarn.md)
 * [RollUp](rollup/README.md)
   * [Quick Start](rollup/01-quick-start.md)
   * [Command Line Commands](rollup/02-command-line.md)
