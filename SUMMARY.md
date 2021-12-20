@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Initial page](README.md)
+* [NodeJS 관련 정리](README.md)
 * [NPM](01-npm.md)
 * [Yarn](02-yarn.md)
 * [RollUp](rollup/README.md)
