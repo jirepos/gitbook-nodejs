@@ -1,4 +1,76 @@
-# 플러그인 설정
+# plugin 
+
+
+## Using plugins
+지금까지 진입점과 상대 경로를 통해 가져온 모듈에서 간단한 번들을 만들었다. 더 복잡한 번들을 빌드함에 따라 NPM과 함께 설치된 모듈 가져오기, Babel로 코드 컴파일, JSON 파일 작업 등 더 많은 유연성이 필요한 경우가 많다.
+
+이를 위해 번들링 프로세스의 주요 지점에서 롤업의 동작을 변경하는 플러그인 을 사용 한다. 멋진 플러그인 목록은 Rollup Awesome List 에서 관리된다.
+
+
+이 자습서에서는 @rollup/plugin-json 을 사용하여 Rollup이 JSON 파일에서 데이터를 가져올 수 있도록 한다. 
+
+프로젝트 루트에 파일을 package.json만들고 다음 콘텐츠를 추가한다. 
+
+```json
+{
+  "name": "rollup-tutorial",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "rollup -c"
+  }
+}
+```
+
+@rollup/plugihn-json을 개발 의존성에 설치한다. 
+```shell
+npm install --save-dev @rollup/plugin-json
+```
+
+우리는 코드가 실행될 때 실제로 플러그인에 의존하지 않기 때문에 --save가 아니라 --save-dev를 사용한다.  번들을 빌드할 때만 사용한다. 
+
+src/foo.js 대신에 package.json을 import하기 위해서 src/main.js를 업데이트 한다. 
+```jsx
+// src/main.js
+import { version } from '../package.json';
+
+export default function () {
+  console.log('version ' + version);
+}
+```
+
+JSON 플러그인을 추가하기 위해서 rollup.config.js를 수정한다. 
+```jsx
+// rollup.config.js
+import json from '@rollup/plugin-json';
+
+export default {
+  input: 'src/main.js',
+  output: {
+    file: 'bundle.js',
+    format: 'cjs'
+  },
+  plugins: [json()]
+};
+```
+
+
+npm run build로 Rollup을 실행한다. 결과는 다음과 같이 보일 것이다. 
+
+```shell
+'use strict';
+
+var version = '1.0.0';
+
+function main() {
+  console.log('version ' + version);
+}
+
+module.exports = main;
+```
+
+
+
+
 
 ## 플러그인 설정
 
