@@ -21,7 +21,7 @@
 }
 ```
 
-@rollup/plugihn-json을 개발 의존성에 설치한다. 
+@rollup/plugin-json을 개발 의존성에 설치한다. 
 ```shell
 npm install --save-dev @rollup/plugin-json
 ```
@@ -144,6 +144,17 @@ index.js 수정한 후 저장할 때마다 브라우저에 수정 사항이 반�
 npm i rollup-plugin-node-resolve rollup-plugin-commonjs
 ```
 
+위 두 개 deprecated 되었다고 함. 다음을 사용한다. 
+```
+@rollup/plugin-node-resolve
+@rollup/plugin-commonjs
+```
+
+
+
+
+
+
 플러그인 설정을 추가한다.
 
 ```javascript
@@ -214,101 +225,3 @@ main().catch(console.error)
 ```
 
 빌드 후 ‘Hello rollup async’이 브라우저에 출력되는지 확인한다..
-
-### CSS 플러그인
-
-플러그인과 기본 css를 설치한다.
-
-```
-$ npm i rollup-plugin-postcss postcss-import autoprefixer
-$ npm i reset-css normalize.css
-```
-
-플러그인 설정을 추가한다.
-
-```javascript
-import cssimport from 'postcss-import';
-import autoprefixer from 'autoprefixer';
-import postcss from 'rollup-plugin-postcss'
-
-default export {
-    plugins : [
-     ...
-     postcss({
-            plugins : [ cssimport(), autoprefixer() ]
-     })        
-}
-```
-
-변환시 지원할 브라우저를 지정한다. package.json에 다음을 추가한다.
-
-```javascript
-{ ...
-  },
-  "browserslist": [
-    "defaults"
-  ]
-}
-```
-
-테스트 css를 작성한다.
-
-```css
-// src/index.css
-
-@charset "utf-8";
-@import "reset-css";
-@import "normalize.css";
-* {
-    box-sizing: border-box;
-}
-body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #333;
-    background-color: #f0f3f4;
-}
-li { list-style: none; }
-a { text-decoration: none; }
-.hello {
-    font-size: 17px;
-}
-.test-autoprefixer {
-    display: grid;
-    transition: all .5s;
-    user-select: none;
-    background: linear-gradient(to bottom, white, black);
-}
-```
-
-테스트 파일을 다시 작성한다.
-
-```javascript
-// src/index.js
-import style from './index.css';
-   const text  = 'rollup';
-   async function say() {
-   return `Hello ${text} async`;
-}
-   const main = async () => {
-   const message = await say();
-   console.log(message);
-   const body = document.querySelector("body");
-   const greeting = document.createElement("div");
-   greeting.innerText = message;
-   greeting.classList.add("hello");
-   body.appendChild(greeting);
-   console.log(greeting.outerHTML);
-   const test = document.createElement("div");
-   test.innerText = "Test prefixer";
-   test.classList.add("test-autoprefixer");
-   body.appendChild(test);
-   console.log(test.outerHTML);
-}
-   main().catch(console.error)
-```
-
-빌드 후 ‘Test prefixer’가 브라우저에 출력되는지 확인한다.
-
-```
-npm run build
-```
